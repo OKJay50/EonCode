@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+
+// Define a parent class with inheritance
+class Animal
+{
+    public string Name { get; set; }
+    public void Speak() => Console.WriteLine($"{Name} says hello!");
+}
+
+// Define a child class that inherits from the parent class
+class Dog : Animal
+{
+    public void Bark() => Console.WriteLine($"{Name} says woof woof!");
+}
+
+// Define an interface
+public interface IVehicle
+{￼￼
+    void Accelerate();
+    void Brake();
+    int Speed { get; }
+}
+
+// Implement the interface in a class
+public class Car : IVehicle
+{
+    private int _speed;
+
+    public void Accelerate() => _speed += 10;
+    public void Brake() => _speed -= 10;
+    public int Speed { get { return _speed; } }
+}
+
+// Define a class with operator overloading
+public class Vector2D
+{
+    public double X { get; set; }
+    public double Y { get; set; }
+
+    public static Vector2D operator+ (Vector2D a, Vector2D b) =>
+        new Vector2D { X = a.X + b.X, Y = a.Y + b.Y };
+}
+
+// Use the classes and features defined above
+static void Main(string[] args)
+{
+    // Work with inheritance and polymorphism
+    Animal animal = new Animal { Name = "Generic animal" };
+    Dog dog = new Dog { Name = "Rex" };
+    animal.Speak();￼￼
+    dog.Speak();
+    dog.Bark();
+
+    // Work with an interface
+    Car car = new Car();
+    car.Accelerate();
+    car.Accelerate();
+    Console.WriteLine($"Car speed: {car.Speed}");
+    car.Brake();
+    Console.WriteLine($"Car speed: {car.Speed}");
+
+    // Use operator overloading on vectors
+    Vector2D a = new Vector2D { X = 1, Y = 2 };
+    Vector2D b = new Vector2D { X = 3, Y = 4 };
+    Vector2D c = a + b;
+    Console.WriteLine($"Vector c is ({c.X}, {c.Y})");
+
+    // Use named and optional arguments
+    ShowInfo(name: "Alice", age: 27, city: "New York");
+    ShowInfo(name: "Bob", age: 35);
+    ShowInfo("Charlie");
+}
+
+// Define a function with named and optional arguments
+static void ShowInfo(string name, int age = -1, string city = "")
+{
+    Console.WriteLine($"Name: {name}, Age: {(age == -1 ? "Unknown" : age.ToString())}, City: {(string.IsNullOrEmpty(city) ? "Unknown" : city)}");
+}
